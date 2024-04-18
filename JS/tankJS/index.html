@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="sk">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Modelovanie zásobníka kvapaliny</title>
+		
+		<link rel="stylesheet" href="css/style.css"><!-- style.css upravuju studenti -->
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.flot.js"></script>
+	</head>
+	<body>
+	<!-- upravuju studenti - zaciatok -->
+
+	<!-- Graficky priebeh vysky hladiny -->
+	<div id="graph"></div>
+
+	<!-- Ovladanie simulacie -->
+	<p>
+		<button id="start">Start</button>
+		<button id="pause">Pause</button>
+		<button id="stop">Stop</button>
+	</p>
+
+	<!-- Nastavovanie vstupneho prietoku ciselne -->
+	<p>
+		<input type="text" id="q0" value="0.5" size="5">
+		<button id="set">Set</button>
+	</p>
+
+	<!-- Nastavovanie vstupneho prietoku posuvnikom -->
+	<p>
+		<input type="range" id="slider" min="0" max="69" value="50">
+	</p>
+
+	<!-- Vykreslenie zasobnika -->
+	<div id="tank">
+		<div id='level'></div>
+	</div>
+
+	<!-- upravuju studenti - koniec -->
+	<script type="text/javascript" src="js/javascript.js"></script><!-- javascript.js upravuju studenti -->
+	</body>
+</html>

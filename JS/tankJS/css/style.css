@@ -1,0 +1,18 @@
+#graph {
+	width: 500px;
+	height: 300px;
+	margin: 10px 0px;
+	border: 1px solid silver;
+}
+
+#tank {
+	width: 100px; 
+	height: 300px;
+	border: 2px solid grey;
+	background: blue;
+}
+
+#level {
+	background: white;
+	
+}

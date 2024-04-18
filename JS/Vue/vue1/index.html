@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 1</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg "
+          :class="navbarClasses">
+
+        <a class="navbar-brand" href="#">Project Using Vue</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li v-for="(page, index) in pages" class="nav-item active" :key="index">
+              <a 
+              class="nav-link" 
+              :class="{active: activepage === index}"
+              :href="page.link.url"
+              @click.prevent="activepage = index"
+              >{{page.link.text}}</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <button class="btn btn-primary"
+            @click.prevent = "useDarkNavbar = !useDarkNavbar">
+            Change theme</button>
+        </div>
+      </nav>
+    <div id="app" class="container">
+        <h1>{{ pages[activepage].pagetitle }}</h1>
+        <p>{{ pages[activepage].content }}</p>
+    </div>
+    <script>
+        Vue.createApp({
+            computed: {
+              navbarClasses(){
+                return {
+                  'navbar-light': !this.useDarkNavbar,
+                  'navbar-dark': this.useDarkNavbar,
+                  'bg-light': !this.useDarkNavbar,
+                  'bg-dark': this.useDarkNavbar
+                }
+              }
+            },
+            data(){
+                return {
+                  activepage: 0,
+                  useDarkNavbar: false,
+                  pages: [
+                    {
+                      link: {text: 'Home', url: 'home.html'},
+                      pagetitle: 'Home Page', 
+                      content: 'This is the home page content'
+                    },
+                  {
+                    link: {text: 'About', url: 'about.html'},
+                    pagetitle: 'About Page', 
+                    content: 'This is the about page content'
+                  },
+                  {
+                    link: {text: 'Contact', url: 'contact.html'},
+                    pagetitle: 'Contact Page', 
+                    content: 'This is the contact page content'
+                  },
+  ],
+}
+            }
+        }).mount('body')
+      </script>
+</body>
+</html>

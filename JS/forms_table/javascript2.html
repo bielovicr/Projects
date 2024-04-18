@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+      #tab1 tr td {
+        width: 50px;
+        height: 50px;
+        border: solid black 1px;
+      }
+      #tab1 {
+        border-spacing: 0;
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Formulár 1 (form1)</h2>
+    <form id="form1" method="get" action="https://uiam.sk/~cirka/spracuj.php">
+      <table>
+        <tbody><tr>
+          <td>Napíšte text:</td>
+          <td><input id="text" type="text" name="text"></td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <input type="submit" id="sub1" value="odošli" disabled="disabled">
+          </td>
+        </tr>
+      </tbody></table>
+    </form>
+
+    <h2>Formulár 2 (form2)</h2>
+    <form id="form2" method="post" action="http://uiam.sk/~cirka/spracuj.php">
+      <p>
+        <input id="text1" type="text" name="text1">&nbsp;
+        <button id="but1" name="but1" type="button">presun ⇒</button>&nbsp;
+        <input id="text2" type="text" name="text2">
+      </p>
+      <p>
+        <input id="sub2" type="submit" value="odošli" name="sub2">
+      </p>
+    </form>
+
+    <h2>Formulár 3 (form3)</h2>
+    <form id="form3" method="post" action="http://uiam.sk/~cirka/spracuj.php">
+      <p>
+        <textarea>Súhlasíte s obchodnými podmienkami?</textarea><br>
+        <input id="radio1" type="radio" name="suhlas" value="ano">
+        <label for="radio1">Súhlasím</label> &nbsp;
+        <input id="radio2" type="radio" name="suhlas" value="nie" checked="checked">
+        <label for="radio2">Nesúhlasím</label>
+      </p>
+      <p>
+        <input id="sub3" type="submit" value="ďalej" disabled="disabled">
+      </p>
+    </form>
+
+    <h2>Vyfarbenie tabuľky</h2>
+    <p>
+      <select id="sel1" style="width: 150px" name="farba">
+        <option selected="selected">red</option>
+        <option>green</option>
+        <option>blue</option>
+      </select>
+    </p>
+
+    <table id="tab1">
+      <tbody><tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody></table>
+
+    <p id="tlacidla"></p>
+    <p id="confirm"></p>
+    <p id="prompt"></p>
+  
+<script>
+  //2
+
+  document.getElementById("text").onkeyup = function(){
+    let characters = this.value; 
+    console.log(characters);
+    let numCharacters = characters.length;
+    console.log(numCharacters);
+    if(numCharacters>3) {
+        this.style.background = 'lightgreen';
+        document.getElementById("sub1").disabled = false;
+    } else {
+      this.style.background = 'orange';
+      document.getElementById("sub1").disabled = true;
+    }
+  } 
+  //3
+  document.getElementById("but1").onclick = function(){
+    document.getElementById("text2").style.color = "black";
+    let text1 = document.getElementById("text1").value;
+    document.getElementById("text2").value = text1;
+    document.getElementById("text1").value = "";
+    document.getElementById("text2").style.color = text1;
+    
+  }
+  //4
+  document.getElementById("radio1").onclick = function(){
+    document.getElementById("sub3").disabled = false;
+  }
+  document.getElementById("radio2").onclick = function(){
+    document.getElementById("sub3").disabled = true;
+  }
+//5
+const table = document.querySelectorAll("#tab1 td")
+//console.log(table);
+for (let i = 0; i< table.length;i++){
+  table[i].addEventListener("click", function(){
+    let color = document.getElementById("sel1").value;
+    this.style.background = color;
+  })
+}
+//6
+let button1 = document.createElement("button");
+let button2 = document.createElement("button");
+let button3 = document.createElement("button");
+button1.innerHTML = 'alert';
+button2.innerHTML = 'confirm';
+button3.innerHTML = 'prompt';
+let buttons = document.getElementById("tlacidla");
+buttons.appendChild(button1);
+buttons.appendChild(button2);
+buttons.appendChild(button3);
+button1.onclick = function(){
+  alert('jeden klik');
+}
+button2.ondblclick = function(){
+  let ok = confirm('Potvrd alebo zrus');
+  if (ok) {
+    document.getElementById('confirm').innerHTML = "potvrdene";
+  } else{
+    document.getElementById('confirm').innerHTML = "zamietnute";
+  }
+}
+button3.onmouseover = function(){
+  let txt = prompt("napis nieco");
+  document.getElementById('prompt').innerHTML = txt;
+
+}
+document.getElementById('sel1').addEventListener('change', function() {
+    document.getElementById('tab1').style.backgroundColor = this.value;
+  });
+</script>
+</body></html>
